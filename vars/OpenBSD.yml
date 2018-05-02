@@ -1,0 +1,3 @@
+check_mk_agent_url: "{{ check_mk_agent_baseurl_agents }}/check_mk_agent.openbsd"
+check_mk_agent_dest: "/usr/local/bin/check_mk_agent"
+check_mk_agent_shell: "/bin/sh"

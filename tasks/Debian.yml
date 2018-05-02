@@ -1,0 +1,7 @@
+---
+  - name: Install the Agent
+    tags:
+      - check-mk_agent
+    apt:
+      deb: "{{ check_mk_agent_url }}"
+      state: present

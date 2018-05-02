@@ -1,0 +1,8 @@
+---
+
+  - name: Get Agent file
+    tags:
+      - check-mk_agent
+    yum:
+      name: "{{ check_mk_agent_url }}"
+      state: present

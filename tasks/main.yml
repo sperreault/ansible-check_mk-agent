@@ -1,0 +1,72 @@
+# vim: noai:ts=2:sw=2:et:
+---
+  - name: include OS-specific vars
+    include_vars: "../vars/{{ ansible_os_family }}.yml"
+    tags:
+      - check-mk_agent
+  - name: setup check_mk over ssh
+    block:
+      - group: 
+          name: "{{ check_mk_agent_groupname }}" 
+          gid: "{{ check_mk_agent_gid }}"
+      - user: 
+          name: "{{ check_mk_agent_username }}" 
+          home: "{{ check_mk_agent_homedir }}" 
+          group: "{{ check_mk_agent_groupname }}" 
+          uid: "{{ check_mk_agent_uid }}" 
+          shell: "{{ check_mk_agent_shell }}" 
+          password: "{{ check_mk_agent_password }}"
+          authorized_key: 
+            user: "{{ check_mk_agent_username }}" 
+            key: "{{ lookup('file', '{{ check_mk_agent_ssh_public_key }}') }}"
+      - package: 
+          name: "sudo" 
+          state: "present"
+      - lineinfile:
+          dest: "{{ check_mk_agent_sudoers_file }}"
+          regexp: '^{{ check_mk_agent_username }}'
+          line: "{{ check_mk_agent_username }} ALL=(ALL) NOPASSWD: {{ check_mk_agent_agent_dest }}"
+    ignore_errors: "yes"
+    when: check_mk_agent_checktype == "sshd"
+    tags:
+      - check-mk_agent
+
+  - name: install OS-specific check_mk client
+    include_tasks: "{{ ansible_os_family }}.yml"
+    tags:
+      - check-mk_agent
+
+  - name: Make sure /etc/check_mk exist
+    file:
+      path: "{{ check_mk_agent_etc_dir }}"
+      state: "directory"
+      owner: "root"
+      group: "root"
+      mode: "0755"
+    tags:
+      - check-mk_agent
+
+  - name: Upload mrpe.cfg
+    template:
+      src: "{{ check_mk_agent_mrpe_conf_src }}"
+      dest: "{{ check_mk_agent_mrpe_conf_dest }}"
+      mode: "0644"
+      owner: "root"
+      group: "root"
+      backup: "yes"
+    tags:
+      - check-mk_agent
+    notify: rediscover host
+
+  - name: check if host is already registered
+    local_action: check_mk_agent_api url="{{ check_mk_agent_baseurl }}" username="{{ check_mk_agent_automation_user }}" secret="{{ check_mk_agent_automation_key }}" hostname="{{ ansible_hostname }}" action="get_host"
+    register: check_mk_agent_get_host
+    tags:
+      - check-mk_agent
+
+  - name: add client to check-mk host 
+    local_action: check_mk_agent_api url="{{ check_mk_agent_baseurl }}" username="{{ check_mk_agent_automation_user }}" secret="{{ check_mk_agent_automation_key }}" hostname="{{ ansible_hostname }}" action="add_host"
+    when: check_mk_agent_get_host.code != 200 
+    notify: rediscover host
+    tags:
+      - check-mk_agent

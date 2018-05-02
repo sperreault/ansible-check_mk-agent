@@ -1,0 +1,24 @@
+check_mk_agent_checktype: "xinetd"
+#check_mk_agent_checktype: "sshd"
+check_mk_agent_etc_dir: "/etc/check_mk/"
+check_mk_agent_mrpe_conf_src: "mrpe.conf.j2"
+check_mk_agent_mrpe_conf_dest: "{{ check_mk_agent_etc_dir}}/mrpe.cfg"
+
+# Required for SSHD only
+check_mk_agent_homedir: "/home/nagios"
+check_mk_agent_username: "nagios"
+check_mk_agent_uid: "206"
+check_mk_agent_groupname: "nagios"
+check_mk_agent_gid: "206"
+check_mk_agent_ssh_public_key: "id_rsa.pub"
+check_mk_agent_shell: "/usr/bin/bash"
+check_mk_agent_password: "{{ lookup('password','/dev/null') }}"
+check_mk_agent_sudoers_file: /etc/sudoers
+#
+
+check_mk_agent_site: "mysite"
+check_mk_agent_baseurl: "http://example.com/{{ check_mk_agent_site }}"
+check_mk_agent_baseurl_agents: "{{ check_mk_agent_baseurl }}/check_mk/agents"
+check_mk_agent_automation_user: "automation"
+check_mk_agent_automation_key: "a7e639d4-4962-11e8-b4d0-873414db2ea4"
+

@@ -1,0 +1,11 @@
+---
+
+  - name: Get Agent file
+    tags:
+      - check-mk_agent
+    get_url:
+      dest: "{{ check_mk_agent_dest }}"
+      owner: root
+      group: wheel
+      mode: 0755
+      url: "{{ check_mk_agent_url }}"
