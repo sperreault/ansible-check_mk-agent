@@ -156,6 +156,3 @@ def activate_changes(api, hostname, res):
 
 if __name__ == '__main__':
     main()
-if __name__ == '__main__':
-    main()
-
