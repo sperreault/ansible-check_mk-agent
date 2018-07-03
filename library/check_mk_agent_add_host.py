@@ -48,11 +48,11 @@ def run_module():
                                     secret=module.params['secret'])
     try:
         result['changed']=True
-        api.add_host(   module_args['hostname'],
-                        folder=module_args['folder'],
-                        ipaddress=module_args['ipaddress'],
-                        alias=module_args['alias'],
-                        tags=module_args['tags'])
+        api.add_host(   module.params['hostname'],
+                        folder=module.params['folder'],
+                        ipaddress=module.params['ipaddress'],
+                        alias=module.params['alias'],
+                        tags=module.params['tags'])
         result['message']='Added '+hostname
         result['code']=200
     except HTTPError as err:
