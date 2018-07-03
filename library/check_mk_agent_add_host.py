@@ -50,7 +50,7 @@ def run_module():
         result['changed']=True
         api.add_host(   module_args['hostname'],
                         folder=module_args['folder'],
-                        ipaddress=module_args=['ipaddr'],
+                        ipaddress=module_args['ipaddr'],
                         alias=module_args['alias'],
                         tags=module_args['tags'])
         result['message']='Added '+hostname
