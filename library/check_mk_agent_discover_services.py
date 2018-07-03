@@ -46,7 +46,7 @@ def run_module():
     try:
         result['changed']=True
         result['discover_services']=api.discover_services(module.params['hostname'])
-        result['message']='Discovered '+hostname
+        result['message']='Discovered '+ module.params['hostname']
         result['code']=200
     except HTTPError as err:
         result['changed']=False
