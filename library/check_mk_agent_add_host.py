@@ -62,7 +62,7 @@ def run_module():
     except check_mk_web_api.exception.CheckMkWebApiException as err:
         result['changed']=False
         result['message']=str(err)
-        if "exists" in res['message']:
+        if "exists" in result['message']:
             result['code']=409
         else:
             result['code']=501   
