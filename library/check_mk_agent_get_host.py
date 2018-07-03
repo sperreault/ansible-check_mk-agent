@@ -48,7 +48,7 @@ def run_module():
         result['changed']=True
         result['get_host']=api.get_host(module.params['hostname'],
                                         module.params['effective_attr'])
-        result['message']='Host informations for '+hostname
+        result['message']='Host informations for '+ module.params['hostname']
         result['code'] = 200
     except HTTPError as err:
         result['changed']=False

@@ -53,7 +53,7 @@ def run_module():
                         ipaddress=module.params['ipaddress'],
                         alias=module.params['alias'],
                         tags=module.params['tags'])
-        result['message']='Added '+hostname
+        result['message']='Added '+ module.params['hostname']
         result['code']=200
     except HTTPError as err:
         result['changed']=False
