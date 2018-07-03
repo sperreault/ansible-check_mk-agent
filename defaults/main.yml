@@ -3,6 +3,9 @@ check_mk_agent_checktype: "xinetd"
 check_mk_agent_etc_dir: "/etc/check_mk/"
 check_mk_agent_mrpe_conf_src: "mrpe.conf.j2"
 check_mk_agent_mrpe_conf_dest: "{{ check_mk_agent_etc_dir}}/mrpe.cfg"
+#check_mk_agent_host_tags:
+#  - default
+#  - tags
 
 # Required for SSHD only
 check_mk_agent_homedir: "/home/nagios"
