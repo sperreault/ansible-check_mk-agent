@@ -20,7 +20,7 @@ def run_module():
         hostname=dict(type='str', required=True),
         tags=dict(type='dict', required=False),
         alias=dict(type='str', required=False),
-        folder=dict(type='str', required=False),
+        folder=dict(type='str', required=False, default='/'),
         ipaddr=dict(type='str', required=False)
     )
 
