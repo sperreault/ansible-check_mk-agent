@@ -18,7 +18,7 @@ def run_module():
         secret=dict(type='str', required=True),
         url=dict(type='str', required=True),
         hostname=dict(type='str', required=True),
-        tags=dict(type='list', required=False),
+        tags=dict(type='dict', required=False),
         alias=dict(type='str', required=False),
         folder=dict(type='str', required=False),
         ipaddr=dict(type='str', required=False)
