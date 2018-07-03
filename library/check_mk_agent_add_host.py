@@ -18,10 +18,10 @@ def run_module():
         secret=dict(type='str', required=True),
         url=dict(type='str', required=True),
         hostname=dict(type='str', required=True),
-        tags=dict(type='dict', required=False),
-        alias=dict(type='str', required=False),
+        tags=dict(type='dict', required=False, default=None),
+        alias=dict(type='str', required=False, default=None),
         folder=dict(type='str', required=False, default='/'),
-        ipaddr=dict(type='str', required=False)
+        ipaddress=dict(type='str', required=False, default=None)
     )
 
     # seed the result dict in the object
@@ -50,7 +50,7 @@ def run_module():
         result['changed']=True
         api.add_host(   module_args['hostname'],
                         folder=module_args['folder'],
-                        ipaddress=module_args['ipaddr'],
+                        ipaddress=module_args['ipaddress'],
                         alias=module_args['alias'],
                         tags=module_args['tags'])
         result['message']='Added '+hostname
