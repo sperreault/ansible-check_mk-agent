@@ -20,8 +20,11 @@ check_mk_agent_sudoers_file: /etc/sudoers
 #
 
 check_mk_agent_site: "mysite"
-check_mk_agent_baseurl: "http://example.com/{{ check_mk_agent_site }}"
-check_mk_agent_baseurl_agents: "{{ check_mk_agent_baseurl }}/check_mk/agents"
+check_mk_agent_version: "1.5.0p16"
+check_mk_agent_baseurl: "http://example.com"
+check_mk_agent_siteurl: "{{ check_mk_agent_baseurl }}/{{ check_mk_agent_site }}"
+check_mk_agent_baseurl_agents: "{{ check_mk_agent_siteurl }}/check_mk/agents"
 check_mk_agent_automation_user: "automation"
 check_mk_agent_automation_key: "a7e639d4-4962-11e8-b4d0-873414db2ea4"
+check_mk_agent_host_tags: []
 
