@@ -1,5 +1,5 @@
 check_mk_agent_checktype: "xinetd"
-check_mk_agent_port: 6556
+check_mk_agent_listen_port: 6556
 check_mk_agent_firewalld: true
 #check_mk_agent_checktype: "sshd"
 check_mk_agent_etc_dir: "/etc/check_mk/"
