@@ -1,6 +1,6 @@
 ---
   - name: rediscover host
-    local_action: check_mk_agent_discover_services url="{{ check_mk_agent_baseurl }}" username="{{ check_mk_agent_automation_user }}" secret="{{ check_mk_agent_automation_key }}"
+    local_action: check_mk_agent_discover_services url="{{ check_mk_agent_baseurl }}" username="{{ check_mk_agent_automation_user }}" secret="{{ check_mk_agent_automation_key }}" hostname="{{ ansible_hostname }}"
     notify: activate changes
 
   - name: activate changes
