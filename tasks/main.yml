@@ -64,7 +64,7 @@
       permanent: true
       immediate: true
       state: enabled
-    when: check_mk_agent_firewalld and check_mk_agent_type == "xinetd"
+    when: check_mk_agent_firewalld and check_mk_agent_checktype == "xinetd"
 
   - name: check if host is already registered
     local_action: check_mk_agent_get_host url="{{ check_mk_agent_siteurl }}" username="{{ check_mk_agent_automation_user }}" secret="{{ check_mk_agent_automation_key }}" hostname="{{ ansible_hostname }}"
